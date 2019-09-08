@@ -18,4 +18,7 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+
 }
