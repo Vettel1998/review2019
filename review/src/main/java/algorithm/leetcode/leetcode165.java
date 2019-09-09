@@ -9,40 +9,32 @@ import java.util.Arrays;
 public class leetcode165 {
 
     public static int compareVersion(String version1, String version2) {
-        String[] v1 = version1.split("\\.");
-        String[] v2 = version2.split("\\.");
+        String[] v1 = version1.split("[.]");
+        String[] v2 = version2.split("[.]");
 
-        int i=0,j=0;
+        int loopEnd = v1.length > v2.length ? v1.length : v2.length;
+        int val1, val2;
 
-        while(i<v1.length&&j<v2.length){
+        for (int i = 0; i < loopEnd; i++) {
 
-            if(Integer.valueOf(v1[i])>Integer.valueOf(v2[j]))
+            if (i < v1.length)
+                val1 = Integer.parseInt(v1[i]);
+            else
+                val1 = 0;
+
+            if (i < v2.length)
+                val2 = Integer.parseInt(v2[i]);
+            else
+                val2 = 0;
+
+            if (val1 > val2)
                 return 1;
-
-            if(Integer.valueOf(v1[i])<Integer.valueOf(v2[j]))
+            else if (val1 < val2)
                 return -1;
-            j++;
-            i++;
+
         }
 
-
-
-        int m,n;
-        for(m=v1.length-1;m>=0;m--){
-            if(!v1[m].equals("0"))
-                break;
-        }
-        for(n=v2.length-1;n>=0;n--){
-            if(!v2[n].equals("0"))
-                break;
-        }
-
-        if(m==n)
-            return 0;
-
-
-        return (m>n)?1:-1;
-
+        return 0;
 
 
 
@@ -50,13 +42,14 @@ public class leetcode165 {
 
 
     public static void main(String[] args) {
-        String version1 = "01", version2 = "1";
-        String[] v1 = version1.split("\\.");
-        String[] v2 = version2.split("\\.");
-        System.out.println(v1.length);
+        String version1 = "1.000.0", version2 = "1.0.0";
+        String[] v1 = version1.split("[.]");
+        String[] v2 = version2.split("[.]");
 
-        System.out.println(Integer.valueOf("01") == Integer.valueOf("1"));
-        //System.out.println( compareVersion(version1,version2));
+        System.out.println(Arrays.toString(v1));
+
+        //System.out.println(Integer.valueOf("01") == Integer.valueOf("1"));
+        System.out.println( compareVersion(version1,version2));
 
 
     }
