@@ -142,7 +142,37 @@
 
 ### 独占锁(写锁) /共享锁(读锁)
 
-- #### ReentrantReadWriteLock
+- ```java
+  private ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
+  rwLock.writeLock().lock();
+  rwLock.readLock().lock();
+  ```
+
+### CountDownLatch
+
+- ```java
+  countDownLatch.countDown();
+  countDownLatch.await();
+  ```
+
+### CyclicBarrier
+
+```java
+CyclicBarrier cyclicBarrier = new CyclicBarrier(7,()->{
+            System.out.println("----召唤神龙------");
+        });
+
+cyclicBarrier.await();
+```
+
+### Semaphore
+
+```java
+semaphore.acquire();
+semaphore.release();
+```
+
+### 阻塞队列
 
 
 
