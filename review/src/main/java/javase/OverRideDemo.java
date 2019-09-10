@@ -9,8 +9,10 @@ public class OverRideDemo {
 
 
 class A{
+    private int a;
+    private void k(){}
     public double m(){
-        return 0.0;
+        return a;
     }
 
     public A(String a){

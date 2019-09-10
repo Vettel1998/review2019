@@ -172,7 +172,47 @@ semaphore.acquire();
 semaphore.release();
 ```
 
-### 阻塞队列
+### 阻塞队列BlockingQueen
+
+- Iterable -> Collection - > List / Queue
+
+| 方法类型 | 抛出异常  | 特殊值   | 阻塞   | 超时               |
+| -------- | --------- | -------- | ------ | ------------------ |
+| 插入     | add(e)    | offer(e) | put(e) | offer(e,time,unit) |
+| 移除     | remove(e) | poll(e)  | take() | poll(time,unit)    |
+| 检查     | element() | peek(e)  | 不可用 | 不可用             |
+
+| 抛出异常 | 阻塞队列满时再往队列里add插入元素会抛出IllegalStateException:Queue full   ,当阻塞队列空时，再往队列remove移除元素会抛出NoSuchElementException |
+| -------- | ------------------------------------------------------------ |
+| 特殊值   | 插入方法，成功true失败false; 移除方法，成功返回出队列的元素，队列里没有就返回null |
+| 一直阻塞 | 当阻塞队列满时，生产者线程继续往队列里put元素时，队列会一直阻塞生产线程直到take数据或响应中断退出 ； 当阻塞队列空时，消费者线程试图从队列take元素，队列会一直阻塞消费者线程直到put数据或响应中断退出 |
+| 超时     |                                                              |
+
+### 生产者消费者
+
+#### 传统版
+
+- 线程操作资源类
+
+- 判断、干活、通知
+
+- 防止虚假唤醒机制    用 while不用if
+
+
+
+### synchronized和Lock有什么区别？用新的Lock有什么好处
+
+- synchronize是关键字属于JVM层面，底层通过monitorenter/monitorexit实现；                      Lock是具体类(java.util.concurrent.locks.lock)是api层面的锁
+- synchronized不需要用户去手动释放锁，当synchronized代码执行完系统会自动让线程释放对锁的占用；                                                                                                                                                   Lock需要lock/unlock配合try/finally
+- 等待是否可中断                                                                                                                                 synchronized不可中断，除非抛出异常或者正常运行完成                                                   ReenterentLock可中断  
+- synchronized是非公平锁；                                                                                                     ReentrentLock两者都可以 ReentrentLock(boolean fair);
+- 锁绑定多个condition  ReentrentLock用来实现分组唤醒需要唤醒的线程们
+
+  
+
+### Condition ????
+
+
 
 
 
