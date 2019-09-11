@@ -1,6 +1,7 @@
 package algorithm.to_offer.offer03;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Stack;
 
@@ -49,5 +50,8 @@ public class offer03 {
 
         return result;
     }
+
+
+
 
 }
