@@ -4,6 +4,9 @@ package juc;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
+
+
 class Mydata{
     volatile int num = 0;
 
