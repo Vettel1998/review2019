@@ -1,12 +1,10 @@
-### Linux命令
+- activemq的默认端口号为61616
 
-- wc  
-- top
-- ps
-- awk
-- grep
-- sed
-- find
+  进程号 ps -ef | grep active | grep -v grep
+
+  netstat -anp | grep port
+
+  lsof -i:61616
 
 
 
