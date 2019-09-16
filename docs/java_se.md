@@ -305,6 +305,87 @@
 
 ### 接口中的内部类
 
+### PrintStream
+
+- ```java
+  char[] ch ={'a','b','c'};
+  System.out.println(ch);
+  System.out.println("ch"+ch);
+  ```
+
+  
+
+### Object类
+
+- **protected** Object clone()
+  - CloneNotSupportedException
+  - Clonable 接口
+  - clone的实现
+  
+- **protected** void finalize()
+
+- public **final** Class<?> getClass()
+
+- public int hashCode()
+
+  - Java hashcode算法
+  - 哈希码值来表示内存地址
+
+- ```java
+  public String toString() {    
+  return getClass().getName() + "@" + Integer.toHexString(hashCode());
+  }
+  ```
+
+- public boolean equals(Object obj)
+
+  - ```java
+    //String类重写的equals
+    public boolean equals(Object anObject) {
+            if (this == anObject) {
+                return true;
+            }
+            if (anObject instanceof String) {
+                String anotherString = (String)anObject;
+                int n = value.length;
+                if (n == anotherString.value.length) {
+                    char v1[] = value;
+                    char v2[] = anotherString.value;
+                    int i = 0;
+                    while (n-- != 0) {
+                        if (v1[i] != v2[i])
+                            return false;
+                        i++;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+    ```
+
+  - **IDEA  提供的equals重写的逻辑**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### JVM内存区域划分
