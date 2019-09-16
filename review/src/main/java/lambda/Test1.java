@@ -1,23 +1,18 @@
 package lambda;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class Test1 {
     public static void main(String[] args) {
-        Calc calc = (m,n)->m+n;
-        Calc calc1 = Integer::sum;
+        List<Integer> list = Arrays.asList(1,2,3,4);
+        list.forEach(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) {
 
-
-        MyArrays myArrays = Arrays::sort;
+            }
+        });
     }
 }
 
-
-interface Calc{
-    int sum(int m,int n);
-
-}
-
-interface MyArrays{
-    void sort(int[] arr);
-}

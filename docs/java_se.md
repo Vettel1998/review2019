@@ -365,6 +365,22 @@
     ```
 
   - **IDEA  提供的equals重写的逻辑**
+  
+  - ##### 为什么需要同时重写equals()和hashcode()
+
+### Objects类
+
+- java.util.Objects类     （effective java）
+
+- Object.equals(Object a,Object b)
+
+  ```java
+  public static boolean equals(Object a, Object b) {
+          return (a == b) || (a != null && a.equals(b));
+      }
+  ```
+
+- Objects.hashcode(Object... values)
 
 
 
