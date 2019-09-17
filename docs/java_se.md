@@ -1,7 +1,3 @@
-### 53个关键字
-
-
-
 ### 三元运算
 
 - boolean表达式 ？ 表达式1 ：表达式２；
@@ -384,9 +380,114 @@
 
 
 
+### String
 
+- ```java
+  public final class String
+  extends Object
+  implements Serializable, Comparable<String>, CharSequence
+  ```
 
+- 所有的字符串直接量都是String的实例
 
+- 如果在常量池中已经定义了字符串直接量，后续的
+
+- ```java
+  String str = "ab";
+  str = str + "c";  //new StringBuilder("ab").apend("c").toString()    
+  // 5个对象
+  ```
+
+- ```java
+  String ss = "123456";
+  		
+  System.out.println("ss = " + ss);
+  		
+  ss.replace('1', '0');
+  		
+  System.out.println("ss = " + ss);
+  ```
+
+- ```java
+  public int compareTo(String anotherString) {
+          int len1 = value.length;
+          int len2 = anotherString.value.length;
+          int lim = Math.min(len1, len2);
+          char v1[] = value;
+          char v2[] = anotherString.value;
+  
+          int k = 0;
+          while (k < lim) {
+              char c1 = v1[k];
+              char c2 = v2[k];
+              if (c1 != c2) {
+                  return c1 - c2;
+              }
+              k++;
+          }
+          return len1 - len2;
+      }
+  ```
+
+- ```java
+  /**
+       * Concatenates the specified string to the end of this string.
+       * <p>
+       * If the length of the argument string is {@code 0}, then this
+       * {@code String} object is returned. Otherwise, a
+       * {@code String} object is returned that represents a character
+       * sequence that is the concatenation of the character sequence
+       * represented by this {@code String} object and the character
+       * sequence represented by the argument string.<p>
+       * Examples:
+       * <blockquote><pre>
+       * "cares".concat("s") returns "caress"
+       * "to".concat("get").concat("her") returns "together"
+       * </pre></blockquote>
+       *
+       * @param   str   the {@code String} that is concatenated to the end
+       *                of this {@code String}.
+       * @return  a string that represents the concatenation of this object's
+       *          characters followed by the string argument's characters.
+       */
+      public String concat(String str) {
+          int otherLen = str.length();
+          if (otherLen == 0) {
+              return this;
+          }
+          int len = value.length;
+          char buf[] = Arrays.copyOf(value, len + otherLen);
+          str.getChars(buf, len);
+          return new String(buf, true);
+      }
+  
+  ```
+
+- indexOf
+
+### 直接量
+
+- 数值直接量、字符直接量、布尔直接量、字符串直接量、空直接量
+- 等式右边参与计算的全是直接量的时候，先运算后赋值
+  - byte  b = 128 - 1;
+  - String s = "a"+"b";
+
+### StringBuilder
+
+- \+ 和 StringBuilder的效率
+
+  ```
+  String s = "";
+  for(int i =0;i<10000;i++)
+  	s+="a";
+  
+  StringBuilder sb = new StringBuilder();
+  for(int i =0;i<10000;i++)
+  	s.append("a");	
+  
+  ```
+
+  
 
 
 

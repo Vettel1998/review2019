@@ -2,18 +2,12 @@ package algorithm.to_offer;
 
 import algorithm.to_offer.offer03.ListNode;
 
+import static algorithm.to_offer.offer15.getListNode;
+
 public class ReverseLinkedList {
 
     public static ListNode reverse(ListNode node){
-        ListNode next = null;
-        ListNode pre = null;
-        while(node!=null){
-            next = node.next;
-            node.next = pre;
-            pre = node;
-            node = next;
-        }
-        return pre;
+        return getListNode(node);
     }
 
 
