@@ -1,9 +1,10 @@
 package javase.a;
 
 public class A {
-    protected int m;
+    private int a;
 
-    public static void m1(){
-        System.out.println("A m1()");
+    //A(){}
+    protected A(int a){
+        this.a = a;
     }
 }
