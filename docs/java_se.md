@@ -463,7 +463,131 @@
   
   ```
 
-- indexOf
+- ##### indexOf(String)
+
+  - 子串第一个字符在原串第一次出现的下标
+
+- ##### getBytes()
+
+- ##### intern()
+
+  - 把指向堆内存的指针转向方法区的常量池中
+  
+- ##### matches(String regex)
+
+  - Pattern 
+
+- ##### replace   replaceAll
+
+- ##### split
+
+  - 切割符在末尾就随着切掉
+
+  - ```java
+    String s1 = "x1dh78dh89";
+    String[] strings = s1.split("\\d");
+    System.out.println(Arrays.toString(strings));  
+    ```
+
+- ##### substring
+
+- ##### trim
+
+### 编码
+
+- 把文字转换成数字的过程，转换的规则就是码表
+- **所有的完整码表默认兼容西欧码表(ISO8859-1)**
+- GBK  
+  - char c= '中' 用GBK编码，占用底层两个字节
+  - char c ='a' 用GBK编码，占用底层一个字节
+- Unicode编码体系
+  - UTF-8  三个字节　.java文件用的
+  - UTF-16 2个字节　Java 以 UTF-16 作为内存的字符存储格式
+  - 平台码
+
+
+
+### 包装类
+
+- **自动装箱/拆箱**　jdk1.5新特性　
+
+- ```java
+  Integer i = 1;   
+  Integer integer = Integer.valueOf(1);
+  int i1 = integer;
+  int i1 = integer.intValue();
+  ```
+
+- Integer.valueOf(int i)
+
+  ```java
+   /**
+       * Returns an {@code Integer} instance representing the specified
+       * {@code int} value.  If a new {@code Integer} instance is not
+       * required, this method should generally be used in preference to
+       * the constructor {@link #Integer(int)}, as this method is likely
+       * to yield significantly better space and time performance by
+       * caching frequently requested values.
+       *
+       * This method will always cache values in the range -128 to 127,
+       * inclusive, and may cache other values outside of this range.
+       *
+       * @param  i an {@code int} value.
+       * @return an {@code Integer} instance representing {@code i}.
+       * @since  1.5
+       */
+      public static Integer valueOf(int i) {
+          if (i >= IntegerCache.low && i <= IntegerCache.high)
+              return IntegerCache.cache[i + (-IntegerCache.low)];
+          return new Integer(i);
+      }
+  ```
+
+- ```java
+  Double d = 3;  //报错
+  public static Double valueOf(String s) throws NumberFormatException {
+          return new Double(parseDouble(s));
+  }
+      public static Double valueOf(double d) {
+          return new Double(d);
+  }
+  　
+  ```
+
+- #### Byte   (cache  -128-127 )
+
+  - ```java
+     /**
+         * Returns a {@code Byte} instance representing the specified
+         * {@code byte} value.
+         * If a new {@code Byte} instance is not required, this method
+         * should generally be used in preference to the constructor
+         * {@link #Byte(byte)}, as this method is likely to yield
+         * significantly better space and time performance since
+         * all byte values are cached.
+         *
+         * @param  b a byte value.
+         * @return a {@code Byte} instance representing {@code b}.
+         * @since  1.5
+         */
+        public static Byte valueOf(byte b) {
+            final int offset = 128;
+            return ByteCache.cache[(int)b + offset];
+        }
+    
+    ```
+
+- #### Short (cache -128-127)
+
+- #### Long  (cache -128-127)
+
+- #### Character (cache 0-127)
+
+- #### Double 和 Float 没有 
+
+
+
+### (Double.NaN == Double.NaN)  == false
 
 ### 直接量
 

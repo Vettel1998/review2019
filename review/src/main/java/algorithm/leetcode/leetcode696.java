@@ -28,26 +28,37 @@ public class leetcode696 {
     }
 
     public static int count2(String s){
-        int[] count = new int[s.length()];
-        int tmp = 0;
+        int result = 0;
+        int current = 0;
+        int pre = 0;
         for (int i = 0; i < s.length(); i++) {
-            count[tmp]++;
+            current++;
             if (i+1>=s.length())
                 break;
-            if (s.charAt(i)!=s.charAt(i+1))
-               tmp++;
+            if (s.charAt(i)!=s.charAt(i+1)){
+                result+=Math.min(current,pre);
+                pre = current;
+                current = 0;
+            }
         }
-        int result = 0;
-        for (int i = 0; i < tmp; i++) {
-            result+=Math.min(count[i],count[i+1]);
-        }
+
+        result+=Math.min(current,pre);
         return result;
+    }
+    public static int count3(String s){
+        int last, cur, res; last = res = 0; cur = 1;
+        for(int i=1; i<s.length(); i++){
+            if(s.charAt(i)== s.charAt(i-1)) cur ++;
+            else{last = cur; cur = 1;}
+            if(last >= cur) res++;
+        }
+        return res;
     }
 
     public static void main(String[] args) {
         //
         String s ="00110";
-        count2(s);
+        System.out.println(count2(s));
 
     }
 }
