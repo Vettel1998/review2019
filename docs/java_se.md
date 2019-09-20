@@ -574,7 +574,7 @@
             final int offset = 128;
             return ByteCache.cache[(int)b + offset];
         }
-    
+      
     ```
 
 - #### Short (cache -128-127)
@@ -611,7 +611,58 @@
   
   ```
 
-  
+
+
+
+### Math
+
+- Math.ceil
+- Math.floor
+- Math.round
+- Math.random
+
+
+
+### strictfp 
+
+- 把计算过程提高到80位，但是最后还是以64位进行存储
+
+
+
+### BigDecimal 
+
+- 用于小数的精确计算(通过字符串)
+
+### BigInteger
+
+
+
+### java.util.Date
+
+### SimpleDateFormat
+
+- 字符串和日期相互转换
+
+### Calendar
+
+- 每个月的第三周的周六开盘，如果还没开始要提醒未开盘,如果超过就提醒已结束
+
+### java.time包
+
+### Throwable
+
+- #### Error
+
+- #### Exception
+
+  - 运行时异常
+  - 编译时异常
+  - 如果要抛出的异常不存在可以自定义异常类继承Exception默认就是编译时异常，也可以继承RuntimeException默认是运行时异常
+  - 分组捕获　catch(Exception1 | Exception2 | Exception3)        jdk1.7
+
+
+
+
 
 
 
