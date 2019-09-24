@@ -660,15 +660,28 @@
   - 如果要抛出的异常不存在可以自定义异常类继承Exception默认就是编译时异常，也可以继承RuntimeException默认是运行时异常
   - 分组捕获　catch(Exception1 | Exception2 | Exception3)        jdk1.7
 
+### 泛型
+
+- 参数化类型
+- 泛型没有向上造型
+- 泛型擦除
 
 
 
+### File
 
+- ```java
+  class DefaultFileSystem {    
+      /**     * Return the FileSystem object for Unix-based platform.     */   
+      public static FileSystem getFileSystem() {        
+          return new UnixFileSystem();   
+      }
+  }
+  ```
+  
+- FilenameFilter
 
-
-
-
-
+- renameTo  剪切
 
 
 
