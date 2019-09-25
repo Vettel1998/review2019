@@ -685,6 +685,44 @@
 
 
 
+### IO流
+
+- 本质是用于数据传输的一套机制
+
+- io流的方向
+
+  - 往内存传输数据－－－输入流
+  - 从内存往外传输数据－－－输出流
+
+- 传输方式
+
+  - 字节流(底层根据字节进行传输　.doc 图片 音频 视频)
+  - 字符流(底层根据字符进行传输　.txt  .java .html)
+
+- #### Writer  字符输出流
+
+- #### Reader 字符输入流
+
+- #### OutputStream 
+
+- #### InputStream
+
+
+
+### FileWriter  
+
+- 创建文件字符输出流的对象
+
+
+
+### Try-with-resources
+
+
+
+### FileReader
+
+### BufferedReader BufferedWriter
+
 
 
 
