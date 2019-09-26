@@ -679,13 +679,13 @@
   }
   ```
   
-- FilenameFilter
+- FileFilter/FilenameFilter
 
-- renameTo  剪切
+- renameTo  剪切  setLastModified
 
 
 
-### IO流
+### Java I/O
 
 - 本质是用于数据传输的一套机制
 
@@ -703,25 +703,39 @@
 
 - #### Reader 字符输入流
 
-- #### OutputStream 
+- #### OutputStream 字节输出流
 
-- #### InputStream
+- #### InputStream　字节输入流
 
+### FileWriter/FileReader
 
-
-### FileWriter  
-
-- 创建文件字符输出流的对象
-
-
+- ```java
+  //创建文件字符输出流的对象·
+  //会检测这个路劲是否存在
+  //如果路劲存在，但是没有相应的文件，就会自动创建一个空文件
+  //如果路径存在，但是文件也存在即使文件里有内容也会创建空文件进行覆盖
+  //如果后面的布尔值为true表明可以进行追加结果，如果不写默认就是false
+  FileWriter writer=new FileWriter("D:\\a.txt",true);
+  ```
 
 ### Try-with-resources
 
+- jdk1.7  AutoCloseable接口
 
+### BufferedReader/BufferedWriter
 
-### FileReader
+- readLine()
+- newLine()
+- 装饰者模式
 
-### BufferedReader BufferedWriter
+### FileInputSream/FileOutputStream
+
+- FileOutputStream 没有重写OutputStream的flush()方法
+- OutputStream的flush()方法  does nothing
+
+### InputStreamReader/OutStreamWriter
+
+### ObjectInputStream/ObjectOutputStream
 
 
 

@@ -20,40 +20,40 @@ public class FileCopyDemo {
             e.printStackTrace();
         }*/
 
-        FileWriter fileWriter = null;
-        FileReader fileReader = null;
-        try {
-            fileReader = new FileReader(path1);
-            fileWriter = new FileWriter(path2);
+       FileReader fileReader = null;
+       FileWriter fileWriter = null;
+       try {
+            fileReader = new FileReader("/home/vettelx/a.java");
+            fileWriter = new FileWriter("/home/vettelx/b.txt");
             char[] buffer = new char[1024];
             int len = -1;
-            while ((len = fileReader.read(buffer)) != -1){
+            while ((len=fileReader.read(buffer))!=-1){
                 fileWriter.write(buffer,0,len);
+                fileWriter.flush();
             }
-            fileWriter.flush();
-        }catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if (fileWriter!=null) {
-                try {
-                    fileWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }finally {
-                    fileWriter = null;
-                }
-            }
-            if (fileReader!=null) {
-                try {
-                    fileReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }finally {
-                    fileReader = null;
-                }
-            }
-        }
+       } catch (FileNotFoundException e) {
+           e.printStackTrace();
+       } catch (IOException e) {
+           e.printStackTrace();
+       }finally {
+           if (fileReader!=null){
+               try {
+                   fileReader.close();
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }finally {
+                   fileReader = null;
+               }
+           }
+           if (fileWriter!=null){
+               try {
+                   fileWriter.close();
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }finally {
+                   fileWriter = null;
+               }
+           }
+       }
     }
 }
