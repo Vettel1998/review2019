@@ -737,7 +737,39 @@
 
 ### ObjectInputStream/ObjectOutputStream
 
+### StringReader/StringWriter
 
+
+
+### 序列化/反序列化
+
+- 序列化：把对象以及相关信息转成字节数组
+
+- 反序列化：把传输过来的字节数组转成对象
+
+- ObjectOutputStream/ObjectInputStream
+
+- 如果对象想要序列化，对象对应的类需要实现Serializable
+
+- 把对象以及属性序列化，方法不参与
+
+- 如果被static/transient修饰的属性不会被序列化
+
+- #### serialVersionUID
+
+  - 序列化版本号
+  - 实现Serializable接口之后，底层会默认计算出一个版本号,序列化时会随着对象一起序列化出去。当要进行反序列化时，会再次计算版本号。
+
+- 集合和映射的对象都不支持序列化
+
+
+
+### Properties
+
+- 父类是HashTable,也是一个映射，支持持久化
+- 键和值只能是String
+- properties文件默认被ISO8859-1编码,
+- 如果给定的键不存在就返回null;如果返回的是null,表面键不存在
 
 
 
