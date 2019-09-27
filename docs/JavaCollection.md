@@ -73,5 +73,79 @@
 
 # ArrayList
 
+- 线程不安全
+
+- #### c.toArray might not return Object
+
+  ```java
+  public ArrayList(Collection<? extends E> c) {
+          elementData = c.toArray();
+          if ((size = elementData.length) != 0) {
+              // c.toArray might (incorrectly) not return Object[] (see 6260652)
+              if (elementData.getClass() != Object[].class)
+                  elementData = Arrays.copyOf(elementData, size, Object[].class);
+          } else {
+              // replace with empty array.
+              this.elementData = EMPTY_ELEMENTDATA;
+          }
+      }
+  ```
+
+- 默认的初始化数组大小为10，扩容1.5倍
+
+- ArrayList的Iterator的remove方法通过expectedModCount = modCount使得可以删除元素
+
+  直接在遍历的时候删除原数组会导致(ConcurrentModificationException)
+
+  ```java
+  public void remove() {
+              if (lastRet < 0)
+                  throw new IllegalStateException();
+              checkForComodification();
+  
+              try {
+                  ArrayList.this.remove(lastRet);
+                  cursor = lastRet;
+                  lastRet = -1;
+                  expectedModCount = modCount;
+              } catch (IndexOutOfBoundsException ex) {
+                  throw new ConcurrentModificationException();
+              }
+          }
+  ```
+
 # Vector
+
+- 线程安全，synchronized
+
+- 默认容量为10，默认扩容为扩容成两倍，也可以设置增长系数capacityIncrement
+
+  ```java
+  int newCapacity = oldCapacity + ((capacityIncrement > 0) ?capacityIncrement : oldCapacity);
+  ```
+
+- ```
+  public Enumeration<E> elements()
+  ```
+
+# fail fast / fail safe
+
+- modCount  checkForComodification
+- 当Iterator这个迭代器被创建后，除了迭代器本身的方法(remove)可以改变集合的结构外，其他的因素如若改变了集合的结构，都被抛出ConcurrentModificationException异常
+- 为了避免触发fail-fast机制，导致异常，我们可以使用Java中提供的一些采用了fail-safe机制的集合类。这样的集合容器在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。java.util.concurrent包下的容器都是fail-safe的，可以在多线程下并发使用，并发修改。同时也可以在foreach中进行add/remove 。
+
+# LinkedList
+
+# Stack
+
+- Vector的子类
+- search(Object o)  从栈顶往下依次查找是否有相等的元素,返回的是从1开始计数的位置值 
+
+# HashSet
+
+# LinkedHashSet
+
+# TreeSet
+
+
 
