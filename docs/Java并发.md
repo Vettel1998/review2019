@@ -1,3 +1,17 @@
+# 创建线程的多种方式
+
+- 把线程执行的内容放到一个类中，类继承Thread,重写Run方法
+- 实现Runnable接口
+- Callable
+
+
+
+# 锁
+
+
+
+
+
 ### Thread
 
 - Thread.activeCount()

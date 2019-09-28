@@ -136,6 +136,8 @@
 
 # LinkedList
 
+- 双向链表
+
 # Stack
 
 - Vector的子类
@@ -143,9 +145,207 @@
 
 # HashSet
 
+- 底层基于HashMap
+
+- Constructs a new, empty set; the backing HashMap instance has default initial capacity (16) and load factor (0.75)
+
+- ```java
+   // Dummy value to associate with an Object in the backing Map
+  private static final Object PRESENT = new Object();
+  public boolean add(E e) {
+          return map.put(e, PRESENT)==null;
+      }
+  ```
+
 # LinkedHashSet
 
 # TreeSet
+
+# HashMap
+
+- The HashMap class is roughly equivalent to Hashtable, except that it is unsynchronized and permits nulls.
+
+- 底层基于数组+链表
+
+- 已经存储数据的桶数/总桶数如果这个结果值大于加载因子(默认为0.75)，进行扩容，扩容一倍
+
+- 每次扩容之后所有元素对象重新存储--- rehash
+
+- 加载因子越小，会频繁的扩容，会频繁的rehash;加载因子越大，导致大量的数据存放到某几个桶里，让链式栈结构变得很长，查询效率降低
+
+- /** * The default initial capacity - MUST be a power of two. */
+
+- 默认容量为16
+
+  ```java
+   /**
+       * The default initial capacity - MUST be a power of two.
+       */
+      static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
+  ```
+
+- 默认的加载因子
+
+  ```java
+   /**
+       * The load factor used when none specified in constructor.
+       */
+      static final float DEFAULT_LOAD_FACTOR = 0.75f;
+  ```
+
+- 桶中数量大于8，并且桶的数量大于64时，链表转换为红黑树；链表长度小于６时，
+
+  ```java
+  /**
+       * The bin count threshold for using a tree rather than list for a
+       * bin.  Bins are converted to trees when adding an element to a
+       * bin with at least this many nodes. The value must be greater
+       * than 2 and should be at least 8 to mesh with assumptions in
+       * tree removal about conversion back to plain bins upon
+       * shrinkage.
+       */
+      static final int TREEIFY_THRESHOLD = 8;
+      /**
+       * The bin count threshold for untreeifying a (split) bin during a
+       * resize operation. Should be less than TREEIFY_THRESHOLD, and at
+       * most 6 to mesh with shrinkage detection under removal.
+       */
+      static final int UNTREEIFY_THRESHOLD = 6;
+  
+      /**
+       * The smallest table capacity for which bins may be treeified.
+       * (Otherwise the table is resized if too many nodes in a bin.)
+       * Should be at least 4 * TREEIFY_THRESHOLD to avoid conflicts
+       * between resizing and treeification thresholds.
+       */
+      static final int MIN_TREEIFY_CAPACITY = 64;
+  ```
+
+  
+
+- ```java
+  //保证capacity是2的n次方
+  static final int tableSizeFor(int cap) {
+          int n = cap - 1;
+          n |= n >>> 1;
+          n |= n >>> 2;
+          n |= n >>> 4;
+          n |= n >>> 8;
+          n |= n >>> 16;
+          return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+      }
+  ```
+
+- hash()  高16位和低16位异或，如果只取余的话会使得hashcode的高位没有发挥作用
+
+  ```
+    static final int hash(Object key) {
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+    }
+  ```
+
+- 查询操作
+  
+  - hash&(n-1) 取代取余操作，这也是容量要求2的n次方的原因
+- 遍历
+- 插入
+
+# HashTable
+
+- 不允许null
+- 初始容量为11 默认扩容为１倍再加１
+
+# LinkedHashMap
+
+- LinkedHashMap是HashMap的子类，但是内部还有一个双向链表维护键值对的顺序，每个键值对既位于哈希表中，也位于双向链表中。LinkedHashMap支持两种顺序插入顺序 、 访问顺序
+
+  插入顺序：先添加的在前面，后添加的在后面。修改操作不影响顺序
+  访问顺序：所谓访问指的是get/put操作，对一个键执行get/put操作后，其对应的键值对会移动到链表末尾，所以最末尾的是最近访问的，最开始的是最久没有被访问的，这就是访问顺序。
+
+- LinkedHashMap并没有重写任何put方法。但是其重写了构建新节点的newNode()方法.
+  newNode()会在HashMap的putVal()方法里被调用，putVal()方法会在批量插入数据putMapEntries(Map<? extends K, ? extends V> m, boolean evict)或者插入单个数据public V put(K key, V value)时被调用。
+
+  LinkedHashMap重写了newNode(),在每次构建新节点时，通过linkNodeLast(p);将新节点链接在内部双向链表的尾部。
+  
+- ```java
+    /**
+       * The head (eldest) of the doubly linked list.
+       */
+      transient LinkedHashMap.Entry<K,V> head;
+    
+      /**
+       * The tail (youngest) of the doubly linked list.
+       */
+      transient LinkedHashMap.Entry<K,V> tail;
+    
+      /**
+       * The iteration ordering method for this linked hash map: <tt>true</tt>
+       * for access-order, <tt>false</tt> for insertion-order.
+       *
+       * @serial
+       */
+      final boolean accessOrder;
+  ```
+
+- HashMap中预留了三个方法让LinkedHashMap来重写
+
+  ```java
+  
+      // Callbacks to allow LinkedHashMap post-actions
+      void afterNodeAccess(Node<K,V> p) { }
+      void afterNodeInsertion(boolean evict) { }
+      void afterNodeRemoval(Node<K,V> p) { }
+  ```
+
+- removeEldest默认返回false,即不会删除最老的节点。
+
+  ```
+  void afterNodeInsertion(boolean evict) { // possibly remove eldest
+          LinkedHashMap.Entry<K,V> first;
+          if (evict && (first = head) != null && removeEldestEntry(first)) {
+              K key = first.key;
+              removeNode(hash(key), key, null, false, true);
+          }
+      }
+     
+      protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
+          return false;
+      }
+  ```
+
+- 可以通过重写removeEldestEntry实现LRUCache(com.mysql.jdbc.util)
+
+  ```java
+  package com.mysql.jdbc.util;
+  
+  import java.util.LinkedHashMap;
+  import java.util.Map.Entry;
+  
+  public class LRUCache extends LinkedHashMap<Object, Object> {
+      private static final long serialVersionUID = 1L;
+      protected int maxElements;
+  
+      public LRUCache(int maxSize) {
+          super(maxSize, 0.75F, true);
+          this.maxElements = maxSize;
+      }
+  
+      /*
+       * (non-Javadoc)
+       * 
+       * @see java.util.LinkedHashMap#removeEldestEntry(java.util.Map.Entry)
+       */
+      @Override
+      protected boolean removeEldestEntry(Entry<Object, Object> eldest) {
+          return (size() > this.maxElements);
+      }
+  }
+  ```
+
+- 重写了containsValue方法，但没有重写containsKey方法
+
+# TreeMap
 
 
 
