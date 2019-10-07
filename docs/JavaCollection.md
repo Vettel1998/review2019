@@ -2,6 +2,13 @@
 
 - 集合框架是用于表示和操作集合的统一体系结构，使它们可以独立于其表示的细节进行操作。 它减少了编程工作，同时提高了性能。 它实现了不相关的API之间的互操作性，减少了设计和学习新API的工作量，并促进了软件重用。 该框架基于十几个集合接口。 它包括这些接口的实现和用于操纵它们的算法。
 
+# fail-fast
+
+- 我们通常说的Java中的fail-fast机制，默认是指的是Java集合中的一种错误检测机制。当多个线程对部分集合进行结构上的改变的操作时，有可能会产生fail-fast机制，这时候会抛出ConcurrentModificationException
+- 在foreach循环中对非fail-safe集合进行元素的remove/add操作时候
+
+# fail-safe
+
 # Iterable
 
 - Implementing this interface allows an object to be the target of the "for-each loop" statement
