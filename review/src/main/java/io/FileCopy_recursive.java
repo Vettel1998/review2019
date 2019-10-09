@@ -3,11 +3,11 @@ package io;
 import java.io.*;
 
 public class FileCopy_recursive {
+    private int a =1;
     public static void main(String[] args) throws IOException {
         File  src= new File("/home/vettelx/src");
         File  dest = new File("/home/vettelx/dest");
         copyFolder(src,dest);
-
     }
 
     public static void copyFolder(File src,File dest) throws IOException {
