@@ -8,5 +8,7 @@ public class Test1 {
       long maxMemory = Runtime.getRuntime().maxMemory();
         System.out.println(totalMemeory/(1024.0*1024));
         System.out.println(maxMemory/(1024.0*1024));
+
+        System.out.println(0.1d+0.2d==0.3d);
     }
 }
