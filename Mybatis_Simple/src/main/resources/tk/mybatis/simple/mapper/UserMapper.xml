@@ -11,6 +11,14 @@
         <result property="headImg" column="head_img" jdbcType="BLOB"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
+    <insert id="insert" parameterType="sysUser">
+        insert into sys_user(id,user_name,user_password,user_email,user_info,head_img,create_time)
+        values(#{id},#{userName},#{userPassword},#{userEmail},#{userInfo},#{headImg,jdbcType=BLOB},#{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insert2" parameterType="sysUser" useGeneratedKeys="true" keyProperty="id">
+              insert into sys_user(user_name,user_password,user_email,user_info,head_img,create_time)
+        values(#{userName},#{userPassword},#{userEmail},#{userInfo},#{headImg,jdbcType=BLOB},#{createTime,jdbcType=TIMESTAMP})
+    </insert>
 
     <select id="selectById" resultMap="userMap">
         select * from sys_user where id = #{id}

@@ -13,4 +13,15 @@ public interface UserMapper {
 
     public List<SysRole> selectRolesByUserId(Long userId);
 
+
+    /**
+     *
+     * @param user
+     * @return
+     */
+    public int insert(SysUser user);
+
+
+
+    public int insert2(SysUser user);
 }
