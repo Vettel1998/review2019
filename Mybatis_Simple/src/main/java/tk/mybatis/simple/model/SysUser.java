@@ -1,5 +1,7 @@
 package tk.mybatis.simple.model;
 
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 /**
  * 用户表
  */
+@ToString
 public class SysUser implements Serializable {
 	private static final long serialVersionUID = -328602757171077630L;
 	/**
