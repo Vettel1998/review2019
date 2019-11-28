@@ -1,8 +1,6 @@
 package LinkedList;
 
 
-import java.util.List;
-
 /**
  *  CS_NOTES 链表1. 找出两个链表的交点
  *  leetcode160. Intersection of Two Linked Lists (Easy)

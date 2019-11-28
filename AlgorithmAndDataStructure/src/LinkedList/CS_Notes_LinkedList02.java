@@ -1,7 +1,5 @@
 package LinkedList;
 
-import java.util.List;
-
 /**
  * CS_Notes 2. 链表反转
  * leetcode206. Reverse Linked List (Easy)
