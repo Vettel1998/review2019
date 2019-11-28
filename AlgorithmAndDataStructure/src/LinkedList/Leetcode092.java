@@ -7,7 +7,7 @@ package LinkedList;
 public class Leetcode092 {
 
     // leetcode题解
-    public ListNode reverseBetween(ListNode head, int m, int n) {
+    /*public ListNode reverseBetween(ListNode head, int m, int n) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode pre = dummy;
@@ -22,10 +22,22 @@ public class Leetcode092 {
             pre.next = nex;
         }
         return dummy.next;
-    }
+    }*/
 
-    //TODO
     public ListNode reverseBetween2(ListNode head,int m,int n){
-       return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        for (int i = 1; i <m ; i++) {
+            pre = pre.next;
+        }
+        head = pre.next;
+        for (int i = m; i <n; i++) {
+            ListNode next = head.next;
+            head.next = next.next;
+            next.next = pre.next;
+            pre.next = next;
+        }
+       return dummy.next;
     }
 }
